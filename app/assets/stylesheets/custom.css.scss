@@ -1,0 +1,41 @@
+.jumbotron {
+  background-image: asset-url('sunset-over-water.png');
+  background-size: cover;
+  color: #fff;
+  font-family: 'Helvetica Neue';
+  font-stretch: expanded;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  margin-left: 15px;
+  margin-right: 15px;
+  text-shadow: -1px 0 #555, 0 1px #555, 1px 0 #555, 0 -1px #555;
+  
+  h2 {
+    font-size: 35px;
+    .lead {
+      font-family: 'Helvetica Neue';
+      font-size: 30px;
+    }
+  }
+}
+
+.plan {
+  border: 1px solid #e7e7e7;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  margin-right: 5px;
+}
+
+.price {
+  font-weight: 700;
+  size: 120%;
+}
+
+.sign-up {
+  margin-top: 5px;
+}
+
+.extra {
+  color: #5cb85c;
+}
