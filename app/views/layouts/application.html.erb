@@ -52,6 +52,7 @@
             <li>
               <%= link_to ('<i class="fa fa-user"></i>' + truncate(current_user.email, length: 25)).html_safe, edit_user_registration_path(current_user), title: 'Edit Profile' %>
             </li>
+            <li><%= link_to '<i class="fa fa-users"></i> Add Members'.html_safe, new_member_path, class: 'navbar-link' %></li>
             <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
             <% else %>
             <li><%= link_to 'Sign in', new_user_session_path %></li>
