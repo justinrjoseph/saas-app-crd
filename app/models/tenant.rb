@@ -2,6 +2,8 @@ class Tenant < ActiveRecord::Base
   acts_as_universal_and_determines_tenant
   has_many :members, dependent: :destroy
   has_many :projects, dependent: :destroy
+  has_one :payment
+  accepts_nested_attributes_for :payment
   validates :name, presence: true, uniqueness: true
 
     def self.create_new_tenant(tenant_params, user_params, coupon_params)
