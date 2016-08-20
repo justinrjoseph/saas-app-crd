@@ -1,12 +1,12 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, except: [:new, :create, :index]
   before_action :set_tenant, except: [:index, :destroy]
   before_action :validate_tenant
 
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
+    @projects = Project.by_user_plan_and_tenant(params[:tenant_id], current_user)
   end
 
   # GET /projects/1
@@ -27,6 +27,7 @@ class ProjectsController < ApplicationController
   # POST /projects.json
   def create
     @project = Project.new(project_params)
+    @project.users << current_user
 
     respond_to do |format|
       if @project.save
@@ -56,6 +57,23 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to root_path, notice: 'Project was successfully destroyed.' }
       format.json { head :no_content }
+    end
+f  end
+  
+  def users
+    @project_users = (@project.users + (User.where(tenant_id: @tenant.id, is_admin: true))) - [current_user]
+    @other_users = @tenant.users.where(tenant_id: @tenant.id, is_admin: false) - (@project_users + [current_user])
+  end
+  
+  def add_user
+    @project_user = UserProject.new(user_id: params[:user_id], project_id: @project.id)
+    
+    respond_to do |format|
+      if @project_user.save
+        format.html { redirect_to users_tenant_project_url(id: @project.id, tenant_id: @project.tenant_id), notice: 'User added.' }
+      else
+        format.html { redirect_to users_tenant_project_url(id: @project.id, tenant_id: @project.tenant_id), error: 'There was a problem adding the user.' }
+      end
     end
   end
 
