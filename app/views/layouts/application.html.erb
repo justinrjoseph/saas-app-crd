@@ -38,29 +38,7 @@
   </head>
   <body>
 
-    <div class="navbar navbar-default navbar-static-top">
-      <div class="container">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <%= link_to 'ProjectManagement', home_index_path, class: 'navbar-brand' %>
-        <div class="navbar-collapse collapse navbar-responsive-collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <% if current_user %>
-            <li>
-              <%= link_to ('<i class="fa fa-user"></i> ' + truncate(current_user.email, length: 25)).html_safe, edit_user_registration_path(current_user), title: 'Edit Profile' %>
-            </li>
-            <li><%= link_to '<i class="fa fa-users"></i> Add Members'.html_safe, new_member_path, class: 'navbar-link' %></li>
-            <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
-            <% else %>
-            <li><%= link_to 'Sign in', new_user_session_path %></li>
-            <% end %>
-          </ul>
-        </div>
-      </div>
-    </div>
+    <%= render 'common/nav' %>
 
     <div class="container">
       <div class="row">
